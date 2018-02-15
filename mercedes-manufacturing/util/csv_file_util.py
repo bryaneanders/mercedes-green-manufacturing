@@ -2,7 +2,7 @@
 
 """ 
 A module defining a class for reading from a CSV file and returning its 
-contents as a list of lists.
+contents as a numpy array
 """
 
 __author__ = "Bryan Anders"
@@ -13,6 +13,7 @@ __maintainer__ = "Bryan Anders"
 __email__ = "bryaneanders@gmail.com"
 
 import os
+import numpy as np
 from file_util import FileUtil
 
 class CsvFileUtil(FileUtil):
@@ -45,16 +46,14 @@ class CsvFileUtil(FileUtil):
                               + path + " does not correspond to a file")
             return []
         
-        # Load the file and parse its contents
+        # Load the file's contents into a list of lists
         with open(path) as file:
             content = file.readlines()
             
-       
         content =  [line.strip().split() for line in content]
         
-        #self.logger.debug("File contents: " + os.linesep + content)
-        #print("File contents: " + os.linesep + content)
-        return content
+        # Return as numpy array
+        return np.array(content)
         
         
             
